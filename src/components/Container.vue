@@ -1,8 +1,6 @@
 <template>
   <div>
-  <Post :name="name" :date="date" :content="content" :likes="likes" :ref="ref"/>
-  <Post :name="name" :date="date" :content="content" :likes="likes" :ref="ref"/>
-  <Post :name="name" :date="date" :content="content" :likes="likes" :ref="ref"/>
+  <Post :게시물 ="게시물[i]" v-for="(a,i) in 게시물" :key="i"/>
 </div>
 </template>
 
@@ -14,11 +12,7 @@ export default {
   Post,
  },
  props:{
-  name: String,
-  likes: Number,
-  date: Number,
-  content: String,
-  filter: String,
+  게시물 : Array,
  }
 }
 </script>

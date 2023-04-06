@@ -9,7 +9,8 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :name="name" :date="date" :content="content" :likes="likes" :ref="ref"/>
+  <Container :게시물="게시물"/>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -19,47 +20,19 @@
 </template>
 
 <script>
-import Container from "@/components/Container.vue"
+import Container from './components/Container'
+import postdata from './assets/postdata.js'
 export default {
-  name: 'App',
-  data(){
-    return{
-  formData: [{
-    name: "Kim Hyun",
-    userImage: "https://placeimg.com/100/100/arch",
-    postImage: "https://placeimg.com/640/480/arch",
-    likes: 36,
-    date: "May 15",
-    liked: false,
-    content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
-    filter: "perpetua"
-  },
-  {
-    name: "John Doe",
-    userImage: "https://placeimg.com/200/200/people",
-    postImage: "https://placeimg.com/640/480/people",
-    likes: 20,
-    date: "Apr 20",
-    liked: false,
-    content: "흔한 자랑스타그램",
-    filter: "clarendon"
-  },
-  {
-    name: "Minny",
-    userImage: "https://placeimg.com/100/100/animals",
-    postImage: "https://placeimg.com/640/480/animals",
-    likes: 49,
-    date: "Apr 4",
-    liked: false,
-    content: "우리집 개는 화장실 물도 내림",
-    filter: "lofi"
-  },
-],  
-}
-  },
-  components: {
-    Container,
-  },
+name:'app',
+data(){
+  return{
+    게시물 : postdata,
+  }
+},
+
+components: {
+  Container,
+},
 }
 </script>
 

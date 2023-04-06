@@ -2,13 +2,13 @@
   <div class="post">
     <div class="post-header">
       <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <span class="profile-name">{{게시물.name}}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{ backgroundImage : `url(${게시물.postImage})` } "></div>
     <div class="post-content">
-      <p>{{ props.likes }}</p>
-      <p><strong>{{ props.name }}</strong> 임시내용</p>
-      <p class="date">{{ props.date }}</p>
+      <p>{{게시물.likes}}</p>
+      <p><strong>글쓴이아이디</strong> {{게시물.content}}</p>
+      <p class="date">{{게시물.date}}</p>
     </div>
 </div> 
 </template>
@@ -16,11 +16,7 @@
 <script>
 export default {
   props:{
-  name: String,
-  likes: Number,
-  date: Number,
-  content: String,
-  filter: String,
+  게시물 : Object,
  }
 }
 </script>
