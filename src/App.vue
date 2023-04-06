@@ -21,17 +21,15 @@
 
 <script>
 import Container from './components/Container'
-import postdata from './assets/postdata.js'
+import Postdata from './assets/postdata.js'
 export default {
-name:'app',
+components:{
+  Container,
+},
 data(){
   return{
-    게시물 : postdata,
+    게시물:Postdata,
   }
-},
-
-components: {
-  Container,
 },
 }
 </script>
