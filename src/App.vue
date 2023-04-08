@@ -11,6 +11,8 @@
 
   <Container :게시물="게시물"/>
 
+  <button @click="more" class="add_btn">더보기</button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -22,6 +24,9 @@
 <script>
 import Container from './components/Container'
 import Postdata from './assets/postdata.js'
+import axios from 'axios'
+axios.get()
+
 export default {
 components:{
   Container,
@@ -29,6 +34,16 @@ components:{
 data(){
   return{
     게시물:Postdata,
+    더보기:0,
+  }
+},
+methods:{
+  more(){
+    axios.get(`https://codingapple1.github.io/vue/more${this.더보기}.json`).then(결과=>{
+      console.log(결과);
+      this.게시물.push(결과.data); // 원래 있던 게시물에서 data를 또 푸시해라
+      this.더보기++;
+    })
   }
 },
 }
@@ -110,5 +125,9 @@ ul {
   position: relative;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+}
+.add_btn{
+  display:block;
+  margin:auto;
 }
 </style>
