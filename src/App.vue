@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시물="게시물"/>
+  <Container :게시물="게시물" :step="step"/>
 
   <button @click="more" class="add_btn">더보기</button>
 
@@ -19,6 +19,13 @@
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
+<!-- <div v-if="step == 0">내용0</div>
+<div v-if="step == 1">내용1</div>
+<div v-if="step == 2">내용2</div>
+<button @click="step = 0">버튼0</button>
+<button @click="step = 1">버튼1</button>
+<button @click="step = 2">버튼2</button> -->
+
 </template>
 
 <script>
@@ -35,11 +42,13 @@ data(){
   return{
     게시물:Postdata,
     더보기:0,
+    step:0,
   }
 },
 methods:{
   more(){
-    axios.get(`https://codingapple1.github.io/vue/more${this.더보기}.json`).then(결과=>{
+    axios.get(`https://codingapple1.github.io/vue/more${this.더보기}.json`)
+    .then(결과=>{
       console.log(결과);
       this.게시물.push(결과.data); // 원래 있던 게시물에서 data를 또 푸시해라
       this.더보기++;
