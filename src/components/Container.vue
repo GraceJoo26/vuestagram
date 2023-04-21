@@ -1,29 +1,26 @@
 <template>
   <div>
-    <div>
+    <div> 
       <button @click="step = 0">POST</button>
       <button @click="step = 1">Select Filter</button>
       <button @click="step = 2">Write</button>
     </div>
-    <Post v-for ="(a,i) in 게시물" :key="a" :게시물="게시물[i]" v-if="step==0"/>
-
+    <div v-if="step==0">
+      <Post v-for ="(a,i) in 게시물" :key="a" :게시물="게시물[i]" />
+    </div>
     <!-- 필터선택페이지 -->
     <div v-if="step==1">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image:url(${이미지})`"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox :이미지="이미지" v-for="필터 in 필터들" :key="필터"></FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step==2">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image:url(${이미지})`"></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea class="write-box" @input="$emit('write',$event.target.value)">write!</textarea>
       </div>
     </div>
   </div>
@@ -31,14 +28,24 @@
 
 <script>
 import Post from '@/components/Post.vue'
+import FilterBox from './FilterBox.vue'
 export default {
+  data(){
+    return {
+      필터들: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+"inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+"reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+    }
+  },
  name:'',
  components:{
   Post,
+  FilterBox,
  },
  props:{
   게시물 : Array,
   step:Number,
+  이미지:String,
  }
 }
 </script>

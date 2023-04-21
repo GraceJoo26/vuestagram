@@ -4,18 +4,19 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++" v-if="step==1">Next</li>
+      <li @click="publish" v-if="step==2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시물="게시물" :step="step"/>
+  <Container :게시물="게시물" :step="step" :이미지="이미지" @write="작성한글=$event"/>
 
   <button @click="more" class="add_btn">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
@@ -43,6 +44,8 @@ data(){
     게시물:Postdata,
     더보기:0,
     step:0,
+    이미지:'',
+    작성한글:'',
   }
 },
 methods:{
@@ -53,8 +56,30 @@ methods:{
       this.게시물.push(결과.data); // 원래 있던 게시물에서 data를 또 푸시해라
       this.더보기++;
     })
-  }
-},
+  },
+  upload(e){
+    let 파일 = e.target.files;
+    console.log(파일);
+    let url=URL.createObjectURL(파일[0]);
+    console.log(url);
+    this.이미지=url;
+    this.step++;
+  },
+  //발행버튼누르면 this.게시물에 {내가쓴거} 밀어넣기
+  publish(){
+    var 내게시물 =
+    {name: "Kim Hyun",
+    userImage: "https://placeimg.com/100/100/arch",
+    postImage: this.이미지,
+    likes: 36,
+    date: "May 15",
+    liked: false,
+    content: this.작성한글,
+    filter: "perpetua"};
+    this.게시물.unshift(내게시물)// unshift:왼쪽의 array에 자료 집어넣어준다.
+    this.step = 0;
+    },
+  },
 }
 </script>
 
